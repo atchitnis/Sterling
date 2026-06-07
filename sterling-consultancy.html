@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sterling Consultancy Ltd – Fractional CFO & Financial Advisory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2557;
+    --navy-deep: #111840;
+    --navy-mid: #243070;
+    --silver: #8a9bb0;
+    --silver-dark: #6b7d94;
+    --silver-light: #b8c5d0;
+    --silver-pale: #edf0f4;
+    --silver-ultra: #f5f7f9;
+    --silver-bg: #e8ecf1;
+    --white: #ffffff;
+    --text-dark: #0e1530;
+    --text-mid: #3a4460;
+    --text-muted: #6b7d94;
+    --accent-gold: #b8a06a;
+    --border: rgba(138,155,176,0.22);
+    --border-silver: rgba(138,155,176,0.35);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text-dark);
+    background: var(--white);
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { font-family: 'Cormorant Garamond', serif; line-height: 1.2; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 2px solid var(--silver);
+    padding: 0 5vw;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 80px;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 14px;
+  }
+  .logo-mark {
+    width: 42px; height: 42px;
+    background: var(--navy); border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--white); font-family: 'Cormorant Garamond', serif;
+    font-size: 20px; font-weight: 600; letter-spacing: -1px;
+  }
+  .logo-text { line-height: 1.1; }
+  .logo-text .name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px; font-weight: 600;
+    color: var(--navy); letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .logo-text .sub {
+    font-size: 10px; color: var(--silver); letter-spacing: 0.12em; text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    text-decoration: none; font-size: 13px; font-weight: 400;
+    color: var(--text-mid); letter-spacing: 0.03em;
+    transition: color 0.2s; position: relative; padding-bottom: 2px;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 1px; background: var(--silver); transform: scaleX(0);
+    transition: transform 0.25s;
+  }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-cta {
+    background: var(--navy); color: var(--white);
+    padding: 10px 24px; border-radius: 3px;
+    font-size: 13px; font-weight: 500; letter-spacing: 0.05em;
+    text-decoration: none; transition: background 0.2s;
+    border: 1px solid transparent;
+  }
+  .nav-cta:hover { background: var(--navy-mid); border-color: var(--silver); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--navy-deep);
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding: 130px 5vw 80px;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 70% at 80% 50%, rgba(36,48,112,0.5) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 15% 75%, rgba(138,155,176,0.12) 0%, transparent 55%),
+      radial-gradient(ellipse 30% 40% at 90% 10%, rgba(138,155,176,0.07) 0%, transparent 50%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(138,155,176,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(138,155,176,0.08) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  /* Silver diagonal accent stripe */
+  .hero-stripe {
+    position: absolute; top: 0; right: 0;
+    width: 3px; height: 100%;
+    background: linear-gradient(to bottom, transparent, var(--silver), transparent);
+    opacity: 0.4;
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 760px; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(138,155,176,0.1);
+    border: 1px solid var(--silver);
+    padding: 7px 18px; border-radius: 2px;
+    margin-bottom: 32px;
+  }
+  .hero-eyebrow span { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--silver); }
+  .hero-eyebrow-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--silver); }
+  h1.hero-headline {
+    font-size: clamp(46px, 6vw, 80px);
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1.08;
+    margin-bottom: 28px;
+    letter-spacing: -0.01em;
+  }
+  h1.hero-headline em { font-style: italic; color: var(--silver); }
+  .hero-sub {
+    font-size: 17px; color: var(--silver-light); font-weight: 300;
+    max-width: 560px; line-height: 1.7; margin-bottom: 48px;
+  }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--white); color: var(--navy-deep);
+    padding: 14px 32px; border-radius: 3px;
+    font-size: 13px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .btn-primary:hover { background: var(--silver-pale); }
+  .btn-ghost {
+    border: 1px solid var(--silver); color: var(--silver);
+    padding: 14px 32px; border-radius: 3px;
+    font-size: 13px; font-weight: 400; letter-spacing: 0.06em; text-transform: uppercase;
+    text-decoration: none; transition: all 0.2s;
+  }
+  .btn-ghost:hover { border-color: var(--white); color: var(--white); }
+  .hero-stats {
+    position: absolute; bottom: 60px; right: 5vw; z-index: 2;
+    display: flex; gap: 48px;
+  }
+  .stat { text-align: right; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px; font-weight: 300;
+    color: var(--white); line-height: 1;
+  }
+  .stat-label { font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--silver); margin-top: 4px; }
+  .stat-divider { width: 1px; background: var(--silver); opacity: 0.35; }
+
+  /* ── SECTION COMMON ── */
+  section { padding: 100px 5vw; }
+  .section-tag {
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--silver); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-tag::before {
+    content: ''; display: block; width: 24px; height: 1px; background: var(--silver);
+  }
+  h2.section-title {
+    font-size: clamp(36px, 4vw, 56px); font-weight: 300;
+    color: var(--navy-deep); line-height: 1.1;
+    margin-bottom: 24px;
+  }
+  h2.section-title em { font-style: italic; color: var(--silver-dark); }
+  .section-intro {
+    font-size: 16px; color: var(--text-muted); max-width: 560px;
+    line-height: 1.75; margin-bottom: 60px;
+  }
+
+  /* ── VALUE PROPS ── */
+  .values { background: var(--silver-pale); }
+  .values-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    background: var(--border-silver); border: 1px solid var(--border-silver);
+    margin-top: 60px;
+  }
+  .value-card {
+    background: var(--white); padding: 48px 36px;
+    transition: background 0.2s;
+    border-top: 3px solid transparent;
+    transition: all 0.25s;
+  }
+  .value-card:hover { background: var(--silver-ultra); border-top-color: var(--silver); }
+  .value-icon {
+    width: 44px; height: 44px; margin-bottom: 28px;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--silver-pale); border-radius: 50%;
+  }
+  .value-icon svg { width: 22px; height: 22px; stroke: var(--silver-dark); fill: none; stroke-width: 1.5; }
+  .value-card h3 {
+    font-size: 22px; font-weight: 500; color: var(--navy-deep);
+    margin-bottom: 14px;
+  }
+  .value-card p { font-size: 14px; color: var(--text-muted); line-height: 1.75; }
+
+  /* ── SERVICES ── */
+  .services-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
+  .services-sticky { position: sticky; top: 120px; }
+  .services-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border-silver); border: 1px solid var(--border-silver); }
+  .service-card {
+    background: var(--white); padding: 36px 32px;
+    cursor: default;
+    position: relative; overflow: hidden;
+    transition: background 0.25s;
+  }
+  .service-card::before {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--silver), var(--navy));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.35s;
+  }
+  .service-card:hover { background: var(--silver-ultra); }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px; color: var(--silver); letter-spacing: 0.08em;
+    margin-bottom: 20px;
+  }
+  .service-card h3 { font-size: 20px; font-weight: 500; color: var(--navy-deep); margin-bottom: 12px; }
+  .service-card p { font-size: 13px; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px; }
+  .service-outcome {
+    font-size: 12px; color: var(--silver-dark); font-weight: 500; letter-spacing: 0.04em;
+    padding-top: 16px; border-top: 1px solid var(--border-silver);
+  }
+
+  /* ── WHY STERLING ── */
+  .why { background: var(--navy-deep); color: var(--white); }
+  .why .section-tag { color: var(--silver); }
+  .why .section-tag::before { background: var(--silver); }
+  .why h2.section-title { color: var(--white); }
+  .why h2.section-title em { color: var(--silver); }
+  .why .section-intro { color: var(--silver-light); }
+  .why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 48px; margin-top: 60px; }
+  .why-item { display: flex; gap: 24px; align-items: flex-start; padding: 32px; border: 1px solid rgba(138,155,176,0.18); border-radius: 2px; transition: border-color 0.2s; }
+  .why-item:hover { border-color: var(--silver); }
+  .why-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px; font-weight: 300; color: var(--silver);
+    opacity: 0.35;
+    line-height: 1; min-width: 52px; text-align: right;
+  }
+  .why-item h3 { font-size: 19px; font-weight: 500; color: var(--white); margin-bottom: 10px; }
+  .why-item p { font-size: 14px; color: var(--silver-light); line-height: 1.75; }
+  .why-quote {
+    margin-top: 80px; padding-top: 60px;
+    border-top: 1px solid rgba(138,155,176,0.3);
+    display: flex; gap: 40px; align-items: center;
+  }
+  .why-quote-mark {
+    font-family: 'Cormorant Garamond', serif; font-size: 120px; font-weight: 300;
+    color: var(--silver); opacity: 0.25; line-height: 0.8; min-width: 60px;
+  }
+  blockquote { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; font-style: italic; color: var(--silver); line-height: 1.5; }
+
+  /* ── INDUSTRIES ── */
+  .industries-grid {
+    display: flex; flex-wrap: wrap; gap: 12px; margin-top: 60px;
+  }
+  .industry-tag {
+    padding: 12px 24px; border: 1px solid var(--border-silver);
+    font-size: 13px; color: var(--silver-dark); letter-spacing: 0.04em;
+    cursor: default; transition: all 0.2s; border-radius: 2px;
+    background: var(--white);
+  }
+  .industry-tag:hover { background: var(--silver); color: var(--white); border-color: var(--silver); }
+
+  /* ── ABOUT ── */
+  .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .about-visual {
+    position: relative; background: var(--silver-bg);
+    aspect-ratio: 3/4; display: flex; align-items: flex-end;
+    overflow: hidden; border: 1px solid var(--border-silver);
+  }
+  .about-visual-inner {
+    width: 100%; padding: 36px;
+    background: linear-gradient(transparent, rgba(26,37,87,0.92));
+    color: var(--white);
+  }
+  .about-visual-inner .founder-name { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; }
+  .about-visual-inner .founder-title { font-size: 12px; color: var(--silver); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; }
+  .about-monogram {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-60%);
+    font-family: 'Cormorant Garamond', serif; font-size: 160px; font-weight: 300;
+    color: rgba(138,155,176,0.15); line-height: 1; user-select: none;
+  }
+  /* Silver SC logo watermark in about panel */
+  .about-logo-wm {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-55%);
+    opacity: 0.08; pointer-events: none;
+  }
+  .about-badges { display: flex; flex-wrap: wrap; gap: 10px; margin: 36px 0; }
+  .about-badge {
+    padding: 8px 18px; background: var(--silver-pale); border: 1px solid var(--border-silver);
+    font-size: 12px; color: var(--silver-dark); letter-spacing: 0.05em; border-radius: 2px;
+  }
+  .credential-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+  .credential-list li {
+    display: flex; align-items: flex-start; gap: 14px;
+    font-size: 14px; color: var(--text-mid); line-height: 1.6;
+  }
+  .credential-list li::before {
+    content: ''; display: block; width: 20px; height: 1px; background: var(--silver);
+    margin-top: 11px; flex-shrink: 0;
+  }
+
+  /* ── INSIGHTS ── */
+  .insights { background: var(--silver-pale); }
+  .insights-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--border-silver); border: 1px solid var(--border-silver); margin-top: 60px; }
+  .insight-card { background: var(--white); padding: 36px 32px; transition: background 0.2s; }
+  .insight-card:hover { background: var(--silver-ultra); }
+  .insight-tag {
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--silver-dark); margin-bottom: 16px;
+    display: inline-block; padding: 4px 10px; border: 1px solid var(--border-silver);
+    background: var(--silver-pale);
+  }
+  .insight-card h3 { font-size: 19px; font-weight: 500; color: var(--navy-deep); margin-bottom: 14px; line-height: 1.35; }
+  .insight-card p { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+  .insight-date { font-size: 11px; color: var(--silver); margin-top: 24px; letter-spacing: 0.05em; }
+
+  /* ── CONTACT ── */
+  .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+  .contact-form { display: flex; flex-direction: column; gap: 20px; }
+  .form-field label { display: block; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--silver-dark); margin-bottom: 8px; }
+  .form-field input, .form-field textarea, .form-field select {
+    width: 100%; padding: 14px 16px;
+    border: 1px solid var(--border-silver); border-radius: 2px;
+    font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text-dark);
+    background: var(--white); outline: none; transition: border-color 0.2s;
+  }
+  .form-field input:focus, .form-field textarea:focus { border-color: var(--silver); }
+  .form-field textarea { resize: vertical; min-height: 120px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .btn-submit {
+    background: var(--navy); color: var(--white);
+    padding: 15px 36px; border: 1px solid transparent; cursor: pointer; border-radius: 3px;
+    font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    align-self: flex-start; transition: all 0.2s;
+  }
+  .btn-submit:hover { background: var(--navy-mid); border-color: var(--silver); }
+  .contact-info { display: flex; flex-direction: column; gap: 40px; }
+  .contact-detail h4 { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--silver); margin-bottom: 10px; border-bottom: 1px solid var(--border-silver); padding-bottom: 8px; }
+  .contact-detail p { font-size: 15px; color: var(--text-dark); line-height: 1.6; }
+  .contact-promise {
+    padding: 36px; background: var(--navy-deep); color: var(--white); border-radius: 2px;
+    border-left: 3px solid var(--silver);
+  }
+  .contact-promise h3 { font-size: 26px; font-weight: 300; font-style: italic; margin-bottom: 14px; }
+  .contact-promise p { font-size: 13px; color: var(--silver-light); line-height: 1.7; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy-deep); color: var(--silver-light);
+    padding: 60px 5vw 40px;
+    border-top: 3px solid var(--silver);
+  }
+  .footer-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    padding-bottom: 48px; border-bottom: 1px solid rgba(138,155,176,0.2);
+    margin-bottom: 36px;
+  }
+  .footer-brand .name { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--white); letter-spacing: 0.06em; text-transform: uppercase; }
+  .footer-brand .tagline { font-size: 11px; color: var(--silver); letter-spacing: 0.12em; text-transform: uppercase; margin-top: 4px; }
+  .footer-links { display: flex; gap: 60px; }
+  .footer-col h5 { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--silver); margin-bottom: 20px; }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .footer-col ul li a { text-decoration: none; font-size: 13px; color: var(--silver-light); transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--white); }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; }
+  .footer-bottom p { font-size: 12px; color: var(--silver); }
+  .footer-reg { font-size: 11px; color: rgba(138,155,181,0.5); }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-content > * { animation: fadeUp 0.7s both; }
+  .hero-content > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-content > *:nth-child(2) { animation-delay: 0.25s; }
+  .hero-content > *:nth-child(3) { animation-delay: 0.4s; }
+  .hero-content > *:nth-child(4) { animation-delay: 0.55s; }
+
+  @media (max-width: 900px) {
+    .values-grid, .services-grid, .why-grid, .about-layout,
+    .insights-grid, .contact-layout, .footer-links { grid-template-columns: 1fr; }
+    .services-layout { grid-template-columns: 1fr; }
+    .services-sticky { position: relative; top: 0; }
+    .hero-stats { position: relative; bottom: auto; right: auto; margin-top: 60px; justify-content: flex-start; }
+    .footer-top { flex-direction: column; gap: 40px; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <img src="/mnt/user-data/uploads/ChatGPT_Image_Apr_28__2026__09_50_12_AM.png" alt="Sterling Consultancy Ltd" style="height:52px; width:auto; display:block;">
+  </div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#industries">Industries</a></li>
+    <li><a href="#insights">Insights</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Book a Consultation</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-stripe"></div>
+  <!-- Hero logo watermark -->
+  <div style="position:absolute;right:6vw;top:50%;transform:translateY(-50%);opacity:0.05;z-index:1;pointer-events:none;">
+    <img src="/mnt/user-data/uploads/ChatGPT_Image_Apr_28__2026__09_50_12_AM.png" alt="" style="width:420px;filter:brightness(10);">
+  </div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-dot"></div>
+      <span>Virtual CFO & Financial Advisory · UK</span>
+    </div>
+    <h1 class="hero-headline">Fractional CFO Leadership<br>for <em>Smarter Financial</em><br>Decisions</h1>
+    <p class="hero-sub">Transforming financial complexity into clarity, control, and growth. CFO-level intelligence for ambitious UK businesses — without the full-time cost.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Book a Consultation</a>
+      <a href="#services" class="btn-ghost">Explore Services</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">20+</div>
+      <div class="stat-label">Years' Experience</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Continents</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-num">CA</div>
+      <div class="stat-label">Chartered Accountant</div>
+    </div>
+  </div>
+</section>
+
+<!-- SILVER STRIP -->
+<div style="background:var(--silver);padding:20px 5vw;display:flex;gap:60px;align-items:center;justify-content:center;flex-wrap:wrap;">
+  <div style="display:flex;align-items:center;gap:12px;color:var(--navy-deep);">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    <span style="font-size:13px;font-weight:500;letter-spacing:0.04em;">20+ Years International Experience</span>
+  </div>
+  <div style="width:1px;height:24px;background:rgba(26,37,87,0.25);"></div>
+  <div style="display:flex;align-items:center;gap:12px;color:var(--navy-deep);">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    <span style="font-size:13px;font-weight:500;letter-spacing:0.04em;">Fractional CFO from Day One</span>
+  </div>
+  <div style="width:1px;height:24px;background:rgba(26,37,87,0.25);"></div>
+  <div style="display:flex;align-items:center;gap:12px;color:var(--navy-deep);">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <span style="font-size:13px;font-weight:500;letter-spacing:0.04em;">Senior-Led, No Juniors</span>
+  </div>
+  <div style="width:1px;height:24px;background:rgba(26,37,87,0.25);"></div>
+  <div style="display:flex;align-items:center;gap:12px;color:var(--navy-deep);">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+    <span style="font-size:13px;font-weight:500;letter-spacing:0.04em;">Big-4 Thinking, Boutique Flexibility</span>
+  </div>
+</div>
+
+<!-- VALUE PROPS -->
+<section class="values" id="value-props">
+  <div class="section-tag">Why Sterling</div>
+  <h2 class="section-title">Big-4 thinking.<br><em>Boutique flexibility.</em></h2>
+  <p class="section-intro">We deliver the strategic financial leadership of a full-time CFO, at a fraction of the cost. Outcome-driven, insight-led, always in your corner.</p>
+  <div class="values-grid">
+    <div class="value-card">
+      <div class="value-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      </div>
+      <h3>CFO Intelligence, Fractional Cost</h3>
+      <p>Access board-level financial leadership without the full-time salary overhead. Scalable engagement that grows with your business — from start-up to scale-up.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      </div>
+      <h3>Real-Time Financial Intelligence</h3>
+      <p>Dynamic dashboards, KPI reporting, and FP&A frameworks that give you a live pulse on performance — so you make decisions from data, not instinct.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">
+        <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      </div>
+      <h3>FP&A-Driven Decision Making</h3>
+      <p>Strategic planning, scenario modelling, and financial forecasting that align your finance function with growth ambitions. Finance as a growth engine — not just reporting.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-layout">
+    <div class="services-sticky">
+      <div class="section-tag">Services</div>
+      <h2 class="section-title">Strategic financial<br><em>advisory services</em></h2>
+      <p class="section-intro">Every engagement is tailored. Every outcome is measurable. Built for businesses that demand CFO-grade rigour without the overhead.</p>
+      <a href="#contact" class="btn-primary" style="display:inline-block; margin-top: 8px;">Discuss Your Needs</a>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-num">01</div>
+        <h3>Virtual CFO Services</h3>
+        <p>Embedded CFO partnership — board presence, investor reporting, financial strategy, and executive decision support for ambitious leadership teams.</p>
+        <div class="service-outcome">→ Executive financial clarity</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">02</div>
+        <h3>FP&A Advisory</h3>
+        <p>Financial planning, budgeting, rolling forecasts, and variance analysis frameworks. Turning numbers into narratives that drive strategy.</p>
+        <div class="service-outcome">→ Sharper forecasting accuracy</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">03</div>
+        <h3>Finance Transformation</h3>
+        <p>Process reengineering, system implementation, automation, and capability building. Modernising your finance function for scale and speed.</p>
+        <div class="service-outcome">→ 40–60% process efficiency gains</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">04</div>
+        <h3>Business Performance Management</h3>
+        <p>KPI frameworks, balanced scorecards, and management reporting suites that give leaders real-time visibility across the enterprise.</p>
+        <div class="service-outcome">→ Aligned, data-driven leadership</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">05</div>
+        <h3>Cash Flow & Working Capital</h3>
+        <p>13-week cash forecasting, working capital optimisation, and liquidity planning. Ensuring your business never runs blind on cash.</p>
+        <div class="service-outcome">→ Cash certainty and control</div>
+      </div>
+      <div class="service-card">
+        <div class="service-num">06</div>
+        <h3>Reporting & Dashboard Automation</h3>
+        <p>Automated financial reporting, Power BI dashboards, and management information systems built for speed, accuracy, and insight.</p>
+        <div class="service-outcome">→ Hours saved, blind spots eliminated</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY STERLING -->
+<section class="why" id="why">
+  <div class="section-tag">Our Advantage</div>
+  <h2 class="section-title">The Sterling<br><em>difference</em></h2>
+  <p class="section-intro">Two decades of international financial leadership — distilled into a boutique advisory practice built for UK ambition.</p>
+  <div class="why-grid">
+    <div class="why-item">
+      <div class="why-num">01</div>
+      <div>
+        <h3>International Pedigree</h3>
+        <p>20+ years across India, UK and USA — spanning blue-chip corporates, high-growth start-ups, and PE-backed businesses. Global perspective, local application.</p>
+      </div>
+    </div>
+    <div class="why-item">
+      <div class="why-num">02</div>
+      <div>
+        <h3>Chartered Accountant Foundation</h3>
+        <p>Technical rigour backed by CA qualification. Every engagement is grounded in the highest professional standards of financial governance and reporting.</p>
+      </div>
+    </div>
+    <div class="why-item">
+      <div class="why-num">03</div>
+      <div>
+        <h3>Transformation-First Mindset</h3>
+        <p>We don't just report on the past. We redesign finance functions for the future — embedding automation, analytics, and strategic thinking at every level.</p>
+      </div>
+    </div>
+    <div class="why-item">
+      <div class="why-num">04</div>
+      <div>
+        <h3>Founder-Led Partnership</h3>
+        <p>You work directly with the Principal — no juniors, no handoffs. Senior expertise on every call, in every deliverable, at every stage of the engagement.</p>
+      </div>
+    </div>
+  </div>
+  <div class="why-quote">
+    <div class="why-quote-mark">"</div>
+    <blockquote>Finance as a strategic growth engine — not just reporting.</blockquote>
+  </div>
+</section>
+
+<!-- INDUSTRIES -->
+<section id="industries">
+  <div class="section-tag">Industries Served</div>
+  <h2 class="section-title">Built for businesses<br><em>on the move</em></h2>
+  <p class="section-intro">We work with ambitious companies at every stage of growth — from pre-revenue start-ups to scaling SMEs seeking institutional rigour.</p>
+  <div class="industries-grid">
+    <div class="industry-tag">Technology & SaaS</div>
+    <div class="industry-tag">Start-ups & Scale-ups</div>
+    <div class="industry-tag">E-commerce</div>
+    <div class="industry-tag">Professional Services</div>
+    <div class="industry-tag">PE-backed Businesses</div>
+    <div class="industry-tag">SMEs in Growth Phase</div>
+    <div class="industry-tag">Founder-led Businesses</div>
+    <div class="industry-tag">Fintech</div>
+    <div class="industry-tag">Consulting & Advisory</div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" style="background: var(--silver-ultra);">
+  <div class="about-layout">
+    <div class="about-visual">
+      <img src="/mnt/user-data/uploads/ChatGPT_Image_Apr_28__2026__09_50_12_AM.png" alt="" style="position:absolute;top:50%;left:50%;transform:translate(-50%,-55%);width:70%;opacity:0.12;pointer-events:none;">
+      <div class="about-visual-inner">
+        <div class="founder-name">Sterling Consultancy Ltd</div>
+        <div class="founder-title">Principal · Chartered Accountant</div>
+      </div>
+    </div>
+    <div>
+      <div class="section-tag">About</div>
+      <h2 class="section-title">20+ years of financial<br><em>leadership delivered</em></h2>
+      <p style="font-size: 16px; color: var(--text-mid); line-height: 1.8; margin-bottom: 28px;">Sterling Consultancy Ltd was founded by a Chartered Accountant with over two decades of senior financial leadership across three continents. Having served in FP&A, finance transformation, and strategic CFO roles within blue-chip organisations in India, the UK and USA, we bring an unparalleled depth of expertise to every client engagement.</p>
+      <p style="font-size: 16px; color: var(--text-mid); line-height: 1.8; margin-bottom: 40px;">Our philosophy is simple: finance should be a catalyst for growth, not a back-office function. We embed ourselves as strategic partners, providing the financial intelligence, rigour, and leadership that ambitious businesses need to scale with confidence.</p>
+      <div class="about-badges">
+        <span class="about-badge">Chartered Accountant</span>
+        <span class="about-badge">FP&A Specialist</span>
+        <span class="about-badge">Finance Transformation</span>
+        <span class="about-badge">UK · India · USA</span>
+      </div>
+      <ul class="credential-list">
+        <li>20+ years' experience in FP&A and strategic financial leadership</li>
+        <li>International exposure across India, UK, and United States markets</li>
+        <li>Delivered finance transformation programmes for growth-stage and listed businesses</li>
+        <li>Former CFO advisory roles across tech, professional services, and PE-backed sectors</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- INSIGHTS -->
+<section class="insights" id="insights">
+  <div class="section-tag">Insights</div>
+  <h2 class="section-title">CFO perspective<br><em>on what matters</em></h2>
+  <p class="section-intro">Practical financial thinking for UK business leaders — from FP&A best practices to the future of finance transformation.</p>
+  <div class="insights-grid">
+    <div class="insight-card">
+      <span class="insight-tag">FP&A</span>
+      <h3>Why Rolling Forecasts Beat Annual Budgets for Growing SMEs</h3>
+      <p>Static budgets create false certainty. Learn how dynamic rolling forecasts give your business the agility to respond to change without losing financial discipline.</p>
+      <div class="insight-date">April 2025 · 6 min read</div>
+    </div>
+    <div class="insight-card">
+      <span class="insight-tag">CFO Advisory</span>
+      <h3>The Fractional CFO Advantage: What PE Investors Expect Before Series A</h3>
+      <p>Investors scrutinise your financial infrastructure before they write a cheque. Here's what your finance function needs to look like — and how to get it there quickly.</p>
+      <div class="insight-date">March 2025 · 8 min read</div>
+    </div>
+    <div class="insight-card">
+      <span class="insight-tag">Finance Transformation</span>
+      <h3>Automating Your Month-End Close: A Practical Framework for SMEs</h3>
+      <p>Manual month-end processes cost time and introduce error. A structured automation approach can cut close time by 50% and improve management reporting quality dramatically.</p>
+      <div class="insight-date">February 2025 · 7 min read</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-tag">Contact</div>
+  <h2 class="section-title">Build financial clarity<br><em>for your business</em></h2>
+  <p class="section-intro">Ready to explore how Sterling Consultancy can transform your finance function? Book a no-obligation consultation and let's talk strategy.</p>
+  <div class="contact-layout">
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-field">
+          <label>First Name</label>
+          <input type="text" placeholder="James">
+        </div>
+        <div class="form-field">
+          <label>Last Name</label>
+          <input type="text" placeholder="Richardson">
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Company</label>
+        <input type="text" placeholder="Your company name">
+      </div>
+      <div class="form-field">
+        <label>Email Address</label>
+        <input type="email" placeholder="james@company.co.uk">
+      </div>
+      <div class="form-field">
+        <label>How can we help?</label>
+        <select>
+          <option>Virtual CFO Services</option>
+          <option>FP&A Advisory</option>
+          <option>Finance Transformation</option>
+          <option>Cash Flow Management</option>
+          <option>Reporting & Dashboards</option>
+          <option>General Enquiry</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>Tell us about your business</label>
+        <textarea placeholder="Share a brief overview of your current financial challenges or goals..."></textarea>
+      </div>
+      <button class="btn-submit">Submit Enquiry</button>
+    </div>
+    <div class="contact-info">
+      <div class="contact-promise">
+        <h3>"We respond to every enquiry within one business day."</h3>
+        <p>Every engagement begins with a complimentary 30-minute strategy call. No obligation — just a candid conversation about your business and how we can help.</p>
+      </div>
+      <div class="contact-detail">
+        <h4>Location</h4>
+        <p>United Kingdom<br><span style="font-size:13px; color: var(--text-muted);">Serving clients across the UK and internationally</span></p>
+      </div>
+      <div class="contact-detail">
+        <h4>Services</h4>
+        <p style="font-size:14px; color: var(--text-mid); line-height:1.9;">Virtual CFO · FP&A Advisory<br>Finance Transformation · Cash Flow Management<br>KPI Dashboards · Business Performance</p>
+      </div>
+      <div class="contact-detail">
+        <h4>Engage Us</h4>
+        <p style="font-size:14px; color: var(--text-mid); line-height:1.9;">We work with UK SMEs, start-ups, scale-ups,<br>and PE-backed businesses at every stage of growth.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img src="/mnt/user-data/uploads/ChatGPT_Image_Apr_28__2026__09_50_12_AM.png" alt="Sterling Consultancy Ltd" style="height:70px;width:auto;filter:brightness(0) invert(1);opacity:0.85;display:block;margin-bottom:8px;">
+      <div class="tagline" style="margin-top:0;">Expertise · Insight · Impact</div>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col">
+        <h5>Services</h5>
+        <ul>
+          <li><a href="#">Virtual CFO</a></li>
+          <li><a href="#">FP&A Advisory</a></li>
+          <li><a href="#">Finance Transformation</a></li>
+          <li><a href="#">Cash Flow Management</a></li>
+          <li><a href="#">Dashboard Automation</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Industries</a></li>
+          <li><a href="#">Insights</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Sterling Consultancy Ltd. All rights reserved.</p>
+    <p class="footer-reg">Registered in England & Wales</p>
+  </div>
+</footer>
+
+</body>
+</html>
